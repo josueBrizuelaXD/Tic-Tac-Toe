@@ -88,12 +88,12 @@
 			gameEnds: function (str) {
 				Game.screen.state.isGameFinished = true;
 				Game.screen.state.stateLbl.innerHTML = str;
-				
+
 				setTimeout(function () {
 					Game.screen.state.stateLbl.innerHTML = "Restarting the game...";
-					
+
 				}, 4000);
-				
+
 				setTimeout(function () {
 					Game.screen.newGame();
 				}, 6000);
@@ -103,7 +103,7 @@
 
 				modalPar.innerHTML = "Which one do you want to be?";
 				Game.screen.state.imgO.src = "img/O.png";
-				Game.screen.state.imgX.src = "img/X.png";
+				Game.screen.state.imgX.src = "img/x.png";
 
 			},
 			whoFirst: function () {
@@ -154,13 +154,18 @@
 
 
 					Game.screen.hideModalContent();
+					
+					
+					setTimeout(function () {
 
+						Game.screen.whoFirst();
+					}, 1000);
 
 					setTimeout(function () {
-						Game.screen.whoFirst();
+
 						Game.screen.showModalContent();
 						Game.screen.state.whoGoesFirstScreen = true;
-					}, 1000);
+					}, 1500);
 
 				} else {
 					Game.screen.state.isPlayerTurn = option === "X" ? true : false;
@@ -170,12 +175,12 @@
 
 					if (!Game.screen.state.isPlayerTurn) {
 						Game.screen.state.stateLbl.innerHTML = "Machine's turn";
-						
-						
+
+
 						Game.gameplay.cpuMove();
-					
-						
-						
+
+
+
 
 					} else {
 						Game.screen.state.stateLbl.innerHTML = "Human's turn";
@@ -284,17 +289,17 @@
 			cpuMove: function () {
 				Game.screen.state.stateLbl.innerHTML = "Machine's turn";
 				setTimeout(function () {
-						Game.screen.state.stateLbl.innerHTML = "Machine is thinking...";
-						}, 1000);
-						
-				
+					Game.screen.state.stateLbl.innerHTML = "Machine is thinking...";
+				}, 1000);
+
+
 				setTimeout(function () {
 					Game.gameplay.ai.minimax(Game.gameplay.state.cpuToken, Game.gameplay.state.humanToken);
-				Game.gameplay.postMoveManager();
+					Game.gameplay.postMoveManager();
 				}, 2000);
 
-				
-				
+
+
 
 			},
 			postMoveManager: function () {
